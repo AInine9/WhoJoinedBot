@@ -22,6 +22,9 @@ jar {
     }
 }
 
+task stage (dependsOn : ['shadowJar'])
+stage.finalizedBy build
+
 test {
     useJUnitPlatform()
 }
