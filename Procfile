@@ -1,1 +1,1 @@
-discordbot: java -cp build/classes/WhoJoinedBot
+discordbot: java -jar build/libs/WhoJoinedBot-1.0-all.jar
