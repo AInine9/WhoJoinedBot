@@ -1,1 +1,1 @@
-discordbot: java WhoJoinedBot.java
+discordbot: sh build/classes/java/main
