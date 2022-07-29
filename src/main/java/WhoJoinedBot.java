@@ -17,13 +17,18 @@ public class WhoJoinedBot {
                 .login().join();
 
         api.addServerVoiceChannelMemberJoinListener(event -> {
-            String user = event.getUser().getNickname(event.getServer()).get();
+            String name;
+            if (event.getUser().getNickname(event.getServer()).isPresent()) {
+                name = event.getUser().getNickname(event.getServer()).get();
+            } else {
+                name = event.getUser().getName();
+            }
             String channel = event.getChannel().getName();
 
             if (event.isMove()) return;
 
             new MessageBuilder()
-                    .append(user, MessageDecoration.UNDERLINE)
+                    .append(name, MessageDecoration.UNDERLINE)
                     .append(" が ")
                     .append(channel, MessageDecoration.BOLD)
                     .append(" に入ったよん")
