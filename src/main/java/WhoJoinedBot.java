@@ -16,22 +16,6 @@ public class WhoJoinedBot {
                 .setToken(System.getenv().get("DISCORD_TOKEN"))
                 .login().join();
 
-        SlashCommand command = SlashCommand.with("setChannel", "Set the channel bot sends messages",
-                        List.of(
-                                SlashCommandOption.create(SlashCommandOptionType.CHANNEL, "CHANNEL", "channel", true)
-                        ))
-                .createGlobal(api)
-                .join();
-
-        api.addSlashCommandCreateListener(event -> {
-            SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
-            ServerChannel channel = slashCommandInteraction.getFirstOptionChannelValue().orElse(null);
-
-            slashCommandInteraction.createImmediateResponder()
-                    .setContent("通知チャンネルが変更されました")
-                    .respond();
-        });
-
         api.addServerVoiceChannelMemberJoinListener(event -> {
             String user = event.getUser().getNickname(event.getServer()).get();
             String channel = event.getChannel().getName();
